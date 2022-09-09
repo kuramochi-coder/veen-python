@@ -1,0 +1,20 @@
+name,priority,direction,access,protocol,source_port_range,destination_port_range,source_address_prefix,destination_address_prefix,Reason
+AllowHttpInbound,500,Inbound,Allow,Tcp,*,80,VirtualNetwork,172.25.82.0/23,
+AllowHttpsInbound,510,Inbound,Allow,Tcp,*,443,VirtualNetwork,172.25.82.0/23,
+AllowHttpsWebAGW01Inbound,520,Inbound,Allow,Tcp,*,443,172.25.80.128/25,172.25.82.0/23,
+AllowGccJumphost,530,Inbound,Allow,Tcp,*,22;3389,100.82.4.160/28,172.25.82.0/23,
+AllowAzureLBHealthProbeToFeLb,540,Inbound,Allow,Tcp,*,443,AzureLoadBalancer,172.25.82.0/23,
+AllowPackerInbound,540,Inbound,Allow,Tcp,*,22;80;443;5895;5896,VirtualNetwork,172.25.82.0/23,Need to update correctly rather than virtual network
+DenyInboundInternet,4096,Inbound,Deny,Tcp,*,*,Internet,*,Rule to deny internet inbound
+AllowAksApiUdp,700,Outbound,Allow,Udp,*,1194,172.25.82.0/23,AzureCloud.SoutheastAsia,
+AllowAksApiTcp,710,Outbound,Allow,Tcp,*,9000,172.25.82.0/23,AzureCloud.SoutheastAsia,
+AllowAksNtp,720,Outbound,Allow,Udp,*,123,172.25.82.0/23,AzureCloud.SoutheastAsia,
+AllowHttpsOutbound,730,Outbound,Allow,Tcp,*,443,172.25.82.0/23,VirtualNetwork,to check destination cidr & Update it correctly Raj
+AllowAzureKeyVault,740,Outbound,Allow,Tcp,*,*,172.25.82.0/23,AzureKeyVault,
+AllowAzureMonitor,750,Outbound,Allow,Tcp,*,*,172.25.82.0/23,AzureMonitor,
+AllowToAzureCloudTCP,760,Outbound,Allow,Tcp,*,80;443;32526,172.25.82.0/23,AzureCloud.SoutheastAsia,
+AllowAzureStorage,770,Outbound,Allow,Tcp,*,443;445,172.25.82.0/23,Storage,
+AllowRedisOutBound,780,Outbound,Allow,Tcp,*,6380,172.25.82.0/23,172.25.81.64/26,
+AllowAzureFileSystem,790,Outbound,Allow,Tcp,*,445,172.25.82.0/23,172.25.81.0/27,
+AllowDbInbound,800,Outbound,Allow,Tcp,*,1433,172.25.82.0/23,172.25.81.0/27,
+DenyInternetOutbound,4095,Outbound,Deny,*,*,*,172.25.82.0/23,Internet,Rule to deny internet Outbound calls
