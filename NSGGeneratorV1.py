@@ -16,7 +16,7 @@ class DictWithoutQuotedKeys(dict):
                 s += "{0}, ".format(DictWithoutQuotedKeys(self[key]))
             else:
                 # Quote all the values
-                s += "\'{0}\', ".format(self[key])
+                s += "\"{0}\", ".format(self[key])
         if len(s) > 1:
             s = s[0: -2]
         s += "}"
@@ -31,7 +31,7 @@ def nsg_generator(terraform_variable_name):
     # For every csv file, we read it and generate the json output with the exact filename.
     for file in files:
         csv_filename = file.split(".")[1]
-        tfvars_output_filename = f".{csv_filename}.tfvars"
+        tfvars_output_filename = f".{csv_filename}.auto.tfvars"
 
         # Read csv file content and output as object.
         df = pd.read_csv(file)
