@@ -7,7 +7,8 @@ from sys import argv
 # Class below takes in an object, it then removes the quotes and colons to prepare for tfvars syntax
 class DictWithoutQuotedKeys(dict):
     def __repr__(self):
-        s = "{"
+        # Strip quotes and colons from keys and append to string s
+        s = "\n{"
         for key in self:
             s += "{0}=".format(key)
 
@@ -16,10 +17,10 @@ class DictWithoutQuotedKeys(dict):
                 s += "{0}, ".format(DictWithoutQuotedKeys(self[key]))
             else:
                 # Quote all the values
-                s += "\"{0}\", ".format(self[key])
+                s += "\"{0}\"\n ".format(self[key])
         if len(s) > 1:
             s = s[0: -2]
-        s += "}"
+        s += "}\n"
         return s
 
 # Function below reads a csv file with Headers and converts to json file.
