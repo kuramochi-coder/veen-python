@@ -10,7 +10,7 @@ class TerraformObjWithoutQuotedKeys(dict):
         # Strip quotes and colons from keys and append to variable, formatted_object
         formatted_object = "\n{"
         for key in self:
-            formatted_object += "{0}=".format(key)
+            formatted_object += "{0} = ".format(key)
 
             if isinstance(self[key], dict):
                 # Apply formatting recursively
